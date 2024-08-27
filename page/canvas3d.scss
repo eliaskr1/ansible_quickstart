@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+:root {
+    --background-color: black;
+} 
+@property --Y {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@property --Z {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--background-color);
+    isolation: isolate;
+}
+canvas {
+    position: absolute;
+}
+h1.space {
+    position: relative;
+    font-size: 2rem;
+    z-index: 9;
+    line-height: 2;
+    font-family: "Audiowide", sans-serif;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    filter: drop-shadow(0px 0px 10px rgba(0,0,0,.3));
+		color: #FFFF00;
+    span {
+				display: inline-block;
+        transform: translateZ(var(--Z)) rotateY(var(--Y));
+        animation: move 1s ease-in-out infinite alternate;
+        animation-delay: calc(var(--i) * .09s);
+    }
+}
+
+@keyframes move {
+    from {
+        --Z: 0px;
+        --Y: 0deg;
+    }
+    to {
+        --Y: 5deg;
+        --Z: -20px;
+    }
+}

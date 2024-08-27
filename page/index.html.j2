@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>S P A C E W E B</title>
+	<link href="canvas3d.scss" rel="stylesheet">
+</head>
+<body>
+<canvas id="canvas3d" class="canvas"></canvas>
+<h1 class="space">
+	{% for item in space_text %}
+		<span style="--i: {{ loop.index }};">{{ item }}</span>
+	{% endfor %}
+</h1>
+<script src="canvas.js" type="module"></script>
+</body>
+</html>

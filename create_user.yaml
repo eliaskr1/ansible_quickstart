@@ -1,0 +1,24 @@
+- name: Use encrypted password
+  hosts: all
+  become: yes
+  vars:
+    the_secret: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      35393536633666323231306437386662656132333733366461626339656132376637313633316265
+      6234396366353465363939313131373137666363643432310a653739363633356633616165316466
+      61663034303335623062306566636262383038313865343861393138346533386466616531386233
+      3563613134646664380a333031653066623834613037613332343132643731313564323963396336
+      3163
+  tasks:
+
+
+  - name: Hash the password
+    ansible.builtin.shell: echo "{{ the_secret }}" | openssl passwd -6 -stdin
+    register: hashed_password
+
+  - name: Create the user byansible
+    ansible.builtin.user:
+      name: byansible
+      password: "{{ hashed_password.stdout }}"
+
+
